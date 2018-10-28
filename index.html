@@ -12,10 +12,21 @@
         <input v-model="newTask" type="text" placeholder="Write your task here">
         <button @click="addTask">ADD TASK</button>
 
-        <ul>
-            <li v-for="task in tasks">{{ task.description }}</li>
-        </ul>
+        <h3>List of all tasks</h3>
 
+            <ul>
+                <li v-for="task in tasks">{{ task.description }}</li>
+            </ul>
+
+        <h3>List of completed tasks</h3>
+            <ul>
+                <li v-for="task in completedTasks">{{ task.description }}</li>
+            </ul>
+
+        <h3>List of tasks to be done</h3>
+        <ul>
+            <li v-for="task in uncompletedTasks">{{ task.description }}</li>
+        </ul>
 
 
 
@@ -47,6 +58,15 @@
                     id: Date.now()
                 })
                 this.newTask = ''
+            }
+        },
+
+        computed: {
+            completedTasks(){
+                return this.tasks.filter(task => task.completed )
+            },
+            uncompletedTasks(){
+                return this.tasks.filter(task => !task.completed )
             }
         }
 
