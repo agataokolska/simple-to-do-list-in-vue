@@ -3,31 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <title>To do list in vue.js</title>
+    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">-->
+    <style>
+        body{
+            width: 70vw;
+
+
+            padding: 100px;
+        }
+        #app{
+            width: 30%;
+            margin: 0 auto;
+
+        }
+        li {list-style-type: none}
+        .border {
+            border:1px solid #88B4C4;
+        }
+        input {
+            border: none;
+            border-bottom-color: #88B4C4;
+            border-bottom-style: dotted ;
+            outline: none
+
+        }
+        h1 {color: #0090cb;
+            text-align: center
+        }
+        h3 {color: #6298c4;
+            text-align: center
+        }
+        .addTask {
+            text-align: center
+        }
+        button {
+            color: #1489b4;
+        }
+    </style>
+
 </head>
 
 <body>
     <div id="app">
+
     <h1>TO DO LIST</h1>
-
-        <input v-model="newTask" type="text" placeholder="Write your task here">
-        <button @click="addTask">ADD TASK</button>
-
+        <div class="addTask">
+             <input v-model="newTask" type="text" placeholder="Write your task here">
+             <button @click="addTask">ADD TASK</button>
+         </div>
         <h3>List of all tasks</h3>
-
+        <div class="border">
             <ul>
                 <li v-for="task, index in tasks" ><input type="checkbox" v-model="task.completed">  {{ task.description }}
                 <button @click="deleteTask(index)">Delete</button></li>
             </ul>
-
-        <h3>List of completed tasks</h3>
+        </div>
+        <h3>List of completed tasks ({{completedTasks.length}})</h3>
+        <div class="border">
             <ul>
                 <li v-for="task in completedTasks">{{ task.description }}</li>
             </ul>
-
-        <h3>List of tasks to be done</h3>
+        </div>
+        <h3>List of tasks to be done ({{uncompletedTasks.length}})</h3>
+        <div class="border">
         <ul>
             <li v-for="task in uncompletedTasks">{{ task.description }}</li>
         </ul>
+        </div>
 
 
 
@@ -53,6 +95,9 @@
 
         methods: {
             addTask(){
+                if(!this.newTask){
+                    return
+                }
                 this.tasks.push({
                     description: this.newTask,
                     completed: false,
