@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>To do list in vue.js</title>
+</head>
+
+<body>
+    <div id="app">
+    <h1>TO do list</h1>
+
+        <input v-model="newTask" type="text" placeholder="Write your task here">
+        <button @click="addTask">ADD TASK</button>
+
+        <ul>
+            <li v-for="task in tasks">{{ task.description }}</li>
+        </ul>
+
+
+
+
+
+    </div>
+
+    <script src="https://unpkg.com/vue@2.5.17/dist/vue.js"></script>
+<script>
+    var app = new Vue({
+        el:'#app',
+
+        data: {
+            tasks: [
+                {description:'Go to the shop', completed: false, id:111},
+                {description:'Wash yourself', completed: false, id:1213},
+                {description:'Eat dinner', completed: true, id:7846127836},
+                {description:'Feed cat', completed: false, id: 73482},
+                {description:'Clean the dishes', completed: false, id:89372},
+                {description:'Go to cinema', completed: true, id:8478363}
+            ],
+            newTask: ''
+        },
+
+        methods: {
+            addTask(){
+                this.tasks.push({
+                    description: this.newTask,
+                    completed: false,
+                    id: Date.now()
+                })
+                this.newTask = ''
+            }
+        }
+
+
+    })
+</script>
+</body>
+</html>
