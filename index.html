@@ -7,7 +7,7 @@
 
 <body>
     <div id="app">
-    <h1>TO do list</h1>
+    <h1>TO DO LIST</h1>
 
         <input v-model="newTask" type="text" placeholder="Write your task here">
         <button @click="addTask">ADD TASK</button>
@@ -15,7 +15,8 @@
         <h3>List of all tasks</h3>
 
             <ul>
-                <li v-for="task in tasks">{{ task.description }}</li>
+                <li v-for="task, index in tasks" ><input type="checkbox" v-model="task.completed">  {{ task.description }}
+                <button @click="deleteTask(index)">Delete</button></li>
             </ul>
 
         <h3>List of completed tasks</h3>
@@ -58,6 +59,9 @@
                     id: Date.now()
                 })
                 this.newTask = ''
+            },
+            deleteTask(index) {
+                this.tasks.splice(index,1)
             }
         },
 
